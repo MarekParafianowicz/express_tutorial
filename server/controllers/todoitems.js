@@ -12,7 +12,12 @@ module.exports = {
   },
   update(req, res) {
     return TodoItem
-      .findById(req.params.todoItemId)
+      .find({
+        where: {
+          id: req.params.todoItemId,
+          todoId: req.params.todoId,
+        },
+      })
       .then(todoItem => {
         if (!todoItem) {
           return res.status(404).send({
@@ -32,7 +37,12 @@ module.exports = {
   },
   destroy(req, res) {
     return TodoItem
-      .findById(req.params.todoItemId)
+      .find({
+        where: {
+          id: req.params.todoItemId,
+          todoId: req.params.todoId,
+        },
+      })
       .then(todoItem => {
         if (!todoItem) {
           return res.status(404).send({
