@@ -25,11 +25,7 @@ module.exports = {
           });
         }
         return todoItem
-          .update({
-            content: req.body.content || todoItem.content,
-            todoId: req.body.todoId || todoItem.todoId,
-            complete: req.body.complete || todoItem.complete,
-          })
+          .update(req.body, { fields: Object.keys(req.body) })
           .then(() => res.status(200).send(todoItem))
           .catch((error) => res.status(400).send(error));
       })
